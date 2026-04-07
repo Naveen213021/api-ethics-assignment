@@ -10,3 +10,19 @@
 | zip_code | Indirect PII | Mask | ZIP codes combined with other fields may reveal identity, so only partial ZIP codes should be shared. |
 | job_title | Indirect PII | Generalize | Job titles may identify someone in small datasets. Converting them to broader categories reduces risk. |
 | diagnosis_notes | Sensitive data | Pseudonymize | Health information is needed for research but must remove any identifying information and use a patient ID instead. |
+
+## Task 2 — Audit the API Script for Ethical Compliance
+
+### Violation 1: Hard-coded API Key
+
+Problem:
+The API key is written directly in the script. This is a security risk because anyone with access to the code can misuse the key.
+
+Corrected Code:
+
+```python
+import os
+import requests
+
+API_URL = "https://healthstats-api.example.com/records"
+API_KEY = os.getenv("HEALTH_API_KEY")
