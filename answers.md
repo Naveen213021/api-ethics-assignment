@@ -26,3 +26,19 @@ import requests
 
 API_URL = "https://healthstats-api.example.com/records"
 API_KEY = os.getenv("HEALTH_API_KEY")
+
+import time
+import requests
+import os
+
+API_URL = "https://healthstats-api.example.com/records"
+API_KEY = os.getenv("HEALTH_API_KEY")
+
+records = []
+
+for page in range(1, 101):
+    response = requests.get(API_URL, params={"page": page, "key": API_KEY})
+    data = response.json()
+    records.extend(data["results"])
+
+    time.sleep(1)  # Respect API rate limits
